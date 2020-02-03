@@ -11,7 +11,7 @@ header {
 }
 
 footer {
-	
+	border: 1px solid white;
 }
 
 nav {
@@ -36,6 +36,7 @@ a:hover, a:visited {
 h1 {
 	text-align: center;
 	font-size: 2em;
+	padding-top: 1em;
 }
 
 h3 {
