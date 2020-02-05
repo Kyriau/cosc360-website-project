@@ -1,0 +1,57 @@
+:root {
+	--theme-red: #B31212;
+	--theme-yellow: #FFC819;
+	--theme-dark-red: #660000;
+	--theme-prussian-blue: #003153;
+	--theme-light-blue: #0971B3;
+	--theme-off-black: #1B1B1B ;
+}
+
+body {
+	background-color: var(--theme-off-black);
+	color: var(--theme-dark-red);
+	font-family: Tahoma;
+	display: flex;
+	flex-direction: column;
+}
+
+header {
+	
+}
+
+footer {
+	bottom: 0;
+	color: var(--theme-yellow);
+	height: 1.5em;
+	position: absolute;
+}
+
+nav {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+nav a {
+	margin: 0.5em;
+	padding: 0.5em;
+}
+
+a:hover, a:visited {
+	color: var(--theme-prussian-blue);
+}
+
+a:link {
+	color: var(--theme-light-blue);
+}
+
+h1 {
+	text-align: center;
+	font-size: 2em;
+	padding-top: 1em;
+}
+
+h3 {
+	text-align: center;
+	font-size: 1.5em;
+}
