@@ -39,7 +39,7 @@ h2 {
 }
 
 h3 {
-	color: var(--color-dark-blue);
+	color: var(--color-yellow);
 	text-align: center;
 	font-size: 1rem;
 }
@@ -63,6 +63,12 @@ img.profile-pic {
 	border: 0.1rem solid var(--color-yellow);
 	width: 100px;
 	height: 100px;
+}
+
+img.profile-pic-large {
+	border: 0.1rem solid var(--color-yellow);
+	width: 200px;
+	height: 200px;
 }
 
 body {
