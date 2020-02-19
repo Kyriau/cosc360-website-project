@@ -1,44 +1,21 @@
 :root {
-	--theme-red: #B31212;
+
 	--theme-yellow: #FFC819;
+	--theme-red: #B31212;
 	--theme-dark-red: #660000;
-	--theme-prussian-blue: #003153;
-	--theme-light-blue: #0971B3;
-	--theme-off-black: #1B1B1B ;
+	--theme-dark-blue: #004E7F;
+	--theme-light-blue: #0DA1FF;
+	--theme-off-black: #1B1B1B;
+	--theme-off-white: #FFFFF0;
+
 }
 
-body {
-	background-color: var(--theme-off-black);
-	color: var(--theme-dark-red);
-	font-family: Tahoma;
-	display: flex;
-	flex-direction: column;
-}
-
-header {
-	
-}
-
-footer {
-	bottom: 0;
-	color: var(--theme-yellow);
-	height: 1.5em;
-	position: absolute;
-}
-
-nav {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-}
-
-nav a {
-	margin: 0.5em;
-	padding: 0.5em;
+a {
+	text-decoration: none;
 }
 
 a:hover, a:visited {
-	color: var(--theme-prussian-blue);
+	color: var(--theme-dark-blue);
 }
 
 a:link {
@@ -46,12 +23,114 @@ a:link {
 }
 
 h1 {
-	text-align: center;
-	font-size: 2em;
-	padding-top: 1em;
+	color: var(--theme-yellow);
+	font-size: 5rem;
+	text-decoration: underline;
+}
+
+h2 {
+	color: var(--theme-off-white);
+	font-size: 2rem;
+	text-decoration: underline;
 }
 
 h3 {
 	text-align: center;
-	font-size: 1.5em;
+	font-size: 1rem;
+}
+
+p {
+
+	padding-bottom: 1rem;
+
+	color: var(--theme-off-white);
+	font-size: 0.8rem;
+
+}
+
+img.profile-pic {
+	border: 0.1rem solid var(--theme-yellow);
+	width: 100px;
+	height: 100px;
+}
+
+body {
+
+	background-color: var(--theme-off-black);
+
+	font-family: Tahoma, Sans-Serif;
+
+	display: flex;
+	flex-direction: column;
+
+}
+
+div {
+
+	margin: 0.5rem;
+
+	/* Debug */
+	/*
+	border: 0.1rem solid var(--theme-off-white);
+	*/
+
+}
+
+div.header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+div.left-header, div.right-header {
+	flex-shrink: 0;
+}
+
+nav {
+
+	display: flex;
+	flex-direction: row;
+	justify-content: left;
+
+}
+
+a.header-nav {
+
+	flex: 0, 0, auto;
+
+	margin-right: 2rem;
+
+	font-size: 2rem;
+
+}
+
+div.main {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+div.sidebar, div.content {
+
+	background-color: var(--theme-dark-red);
+	border: 0.1rem solid var(--theme-yellow);
+
+	padding: 0.5rem;
+
+}
+
+div.sidebar {
+	flex: 1 1 15%;
+}
+
+div.content {
+	flex: 1 1 85%;
+}
+
+div.footer {
+	color: var(--theme-yellow);
+}
+
+div.nav {
+	justify-content: center;
 }
