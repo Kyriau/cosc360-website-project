@@ -1,12 +1,14 @@
 :root {
 
-	--theme-yellow: #FFC819;
-	--theme-red: #B31212;
-	--theme-dark-red: #660000;
-	--theme-dark-blue: #004E7F;
-	--theme-light-blue: #0DA1FF;
-	--theme-off-black: #1B1B1B;
-	--theme-off-white: #FFFFF0;
+	--color-yellow: #FFC819;
+	--color-red: #B31212;
+	--color-dark-red: #660000;
+	--color-dark-blue: #004E7F;
+	--color-light-blue: #0DA1FF;
+	--color-off-black: #1B1B1B;
+	--color-off-white: #FFFFF0;
+
+	--border-yellow: 0.1rem solid var(--color-yellow);
 
 }
 
@@ -15,48 +17,57 @@ a {
 }
 
 a:hover, a:visited {
-	color: var(--theme-dark-blue);
+	color: var(--color-dark-blue);
 }
 
 a:link {
-	color: var(--theme-light-blue);
+	color: var(--color-light-blue);
 }
 
 h1 {
-	color: var(--theme-yellow);
+	color: var(--color-yellow);
+	text-align: center;
 	font-size: 5rem;
 	text-decoration: underline;
 }
 
 h2 {
-	color: var(--theme-off-white);
+	color: var(--color-off-white);
+	text-align: center;
 	font-size: 2rem;
 	text-decoration: underline;
 }
 
 h3 {
+	color: var(--color-dark-blue);
 	text-align: center;
 	font-size: 1rem;
 }
 
+h4 {
+	color: var(--color-off-white);
+	font-size: 1rem;
+	text-overflow: ellipsis;
+}
+
 p {
 
-	padding-bottom: 1rem;
+	margin: 0.5rem 0rem;
 
-	color: var(--theme-off-white);
+	color: var(--color-off-white);
 	font-size: 0.8rem;
 
 }
 
 img.profile-pic {
-	border: 0.1rem solid var(--theme-yellow);
+	border: 0.1rem solid var(--color-yellow);
 	width: 100px;
 	height: 100px;
 }
 
 body {
 
-	background-color: var(--theme-off-black);
+	background-color: var(--color-off-black);
 
 	font-family: Tahoma, Sans-Serif;
 
@@ -71,7 +82,7 @@ div {
 
 	/* Debug */
 	/*
-	border: 0.1rem solid var(--theme-off-white);
+	border: 0.1rem solid var(--color-off-white);
 	*/
 
 }
@@ -112,8 +123,8 @@ div.main {
 
 div.sidebar, div.content {
 
-	background-color: var(--theme-dark-red);
-	border: 0.1rem solid var(--theme-yellow);
+	background-color: var(--color-dark-red);
+	border: var(--border-yellow);
 
 	padding: 0.5rem;
 
@@ -127,8 +138,26 @@ div.content {
 	flex: 1 1 85%;
 }
 
+div.content-row {
+
+	background-color: var(--color-red);
+	border: var(--border-yellow);
+
+	display: flex;
+	flex-direction: row;
+
+}
+
+div.post-title {
+	flex: 1 1 15%;
+}
+
+div.post-preview {
+	flex: 1 1 85%;
+}
+
 div.footer {
-	color: var(--theme-yellow);
+	color: var(--color-yellow);
 }
 
 div.nav {
