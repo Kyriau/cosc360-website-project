@@ -78,5 +78,10 @@ CREATE TABLE UserComments(
 -- Populate Tables
 
 INSERT INTO Users(Username, Email, Password, Administrator) VALUES
-	('Kyriau', 'jeff.aj.thomson@alumni.ubc.ca', 'password', TRUE)
+	('Kyriau', 'jeff.aj.thomson@alumni.ubc.ca', 'password', TRUE),
+	('asdf', 'asdf@asdf.asdf', 'asdf', FALSE)
+;
+
+INSERT INTO Forums(Parent, UpdateTime, Name) VALUES
+	(NULL, NOW(), 'Main')
 ;
