@@ -39,7 +39,7 @@
 	}
 	
 	// Echo a list of posts in this forum
-	function post_list($forumID) {
+	function thread_list($forumID) {
 		
 		global $threadQuery, $commentQuery;
 		
@@ -62,7 +62,7 @@
 		
 		$threads->close();
 		
-		// TODO: Administrator actions
+		// TODO: User actions
 		
 	}
 	
