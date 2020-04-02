@@ -1,10 +1,4 @@
-<?php
-	// SQL setup.
-	$user = 'root';
-	$pass = '';
-	$dbname = 'forum';
-	$db = new mysqli('localhost', $user, $pass, $dbname);
-?>
+<?php include 'database.php'; ?>
 
 <!DOCTYPE html>
 <html lang=en>
@@ -29,18 +23,8 @@
 				<a href="html/profile.html"><img class="profile-pic" src="img/Duck.png"></a>
 				<h3><a href="html/profile.html">Kyriau</a></h3>
 			</div>
+			<?php include 'userinfo.php'; ?>
 		</div>
-		
-		<!-- Some test db querry. Should be removed asap. -->
-		<?php
-			echo "test";
-			$testResult = $db->query("SELECT * FROM Users");
-			while($row = $testResult->fetch_row()) {
-				foreach($row as $value) {
-					echo $value."<br>";
-				}
-			}
-		?>
 		
 		<div class="main">
 		
@@ -52,23 +36,10 @@
 			
 			<!-- TODO: dynamically fetch forums and posts -->
 			<div class="content">
+			
 				<h2>Forums</h2>
-				<div class="content-row">
-					<div class="post-title">
-						<h4><a href="html/forum.html">Forum 1</a></h4>
-					</div>
-					<div class="post-preview">
-						<h4>Et sollicitudin ac orci phasellus. Facilisi etiam dignissim diam quis enim lobortis scelerisque. Morbi tempus iaculis urna id. Maecenas pharetra convallis posuere morbi leo urna. Nulla aliquet enim tortor at auctor urna. Sed viverra ipsum nunc aliquet bibendum enim facilisis gravida. Scelerisque fermentum dui faucibus in ornare quam. Viverra accumsan in nisl nisi scelerisque. Eu facilisis sed odio morbi. Tortor dignissim convallis aenean et tortor at risus viverra. Sagittis nisl rhoncus mattis rhoncus urna neque viverra.</h4>
-					</div>
-				</div>
-				<div class="content-row">
-					<div class="post-title">
-						<h4><a href="html/forum.html">Forum 2</a></h4>
-					</div>
-					<div class="post-preview">
-						<h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sem nulla pharetra diam sit amet nisl suscipit adipiscing. Quis risus sed vulputate odio ut enim blandit volutpat. Sed sed risus pretium quam. Fermentum dui faucibus in ornare quam viverra orci sagittis eu. Risus sed vulputate odio ut. Purus viverra accumsan in nisl. Vitae congue eu consequat ac felis donec et. Nulla porttitor massa id neque. Dictum non consectetur a erat nam at lectus urna duis. Non tellus orci ac auctor augue mauris augue neque gravida. Elementum pulvinar etiam non quam lacus suspendisse faucibus. Et tortor consequat id porta nibh venenatis cras. Hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit. Libero volutpat sed cras ornare arcu.</h4>
-					</div>
-				</div>
+				<?php forum_list(1); ?>
+				
 				<h2>Posts</h2>
 				<div class="content-row">
 					<div class="post-title">

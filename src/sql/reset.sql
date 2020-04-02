@@ -29,6 +29,7 @@ CREATE TABLE Forums(
 	Parent INT,
 	UpdateTime DATETIME NOT NULL,
 	Name VARCHAR(64) NOT NULL,
+	Description TEXT,
 	
 	PRIMARY KEY (ID),
 	FOREIGN KEY (Parent) REFERENCES Forums(ID),
@@ -78,5 +79,13 @@ CREATE TABLE UserComments(
 -- Populate Tables
 
 INSERT INTO Users(Username, Email, Password, Administrator) VALUES
-	('Kyriau', 'jeff.aj.thomson@alumni.ubc.ca', 'password', TRUE)
+	('Kyriau', 'jeff.aj.thomson@alumni.ubc.ca', 'password', TRUE),
+	('asdf', 'asdf@asdf.asdf', 'asdf', FALSE)
+;
+
+INSERT INTO Forums(Parent, UpdateTime, Name, Description) VALUES
+	(NULL, NOW(), 'Main', 'The central forum of the website.'),
+	(1, NOW(), 'Subforum 1', 'A subforum of the Main forum.'),
+	(1, NOW(), 'Subforum 2', 'Another subforum of the Main forum.'),
+	(3, NOW(), 'Second-Level Forum', 'A Subforum of a subforum (Subforum 2).')
 ;
