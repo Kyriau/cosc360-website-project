@@ -2,11 +2,13 @@
 
 	include_once 'database.php';
 	
-	$user1 = get_user_by_username($_POST['username']);
+	$user = get_user_by_username($_POST['username']);
 	
-	if($user1[3] == password_hash($_POST['password'], PASSWORD_DEFAULT)) {
-		$_SESSION['userid'] = $user1[0];
-		$_SESSION['password'] = $user1[3];
+	if(password_verify($_POST['password'], $user[3])) {
+		session_start();
+		$_SESSION['userid'] = $user[0];
+		$_SESSION['passhash'] = $user[3];
+		echo "Login Success";
 	}
 	
 	$redirectURI = $_POST['redirect'];

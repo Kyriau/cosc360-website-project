@@ -13,7 +13,7 @@
 	$threadQuery = $db->prepare("SELECT ID, Title FROM Threads WHERE ForumID = ? ORDER BY UpdateTime;");
 	$commentQuery = $db->prepare("SELECT ID, Content FROM Comments WHERE ThreadID = ? ORDER BY UpdateTime LIMIT ?;");
 	$userCommentQuery = null;
-	$userInsert = $db->prepare("INSERT INTO User(Username, Email, Password, Administrator) VALUE (?, ?, ?, FALSE);";
+	$userInsert = $db->prepare("INSERT INTO User(Username, Email, Password, Administrator) VALUE (?, ?, ?, FALSE);");
 	
 	function get_user_by_username($username) {
 		
@@ -105,7 +105,7 @@
 	
 	function insert_user($username, $password, $email) {
 		
-		global userInsert;
+		global $userInsert;
 		
 	}
 	

@@ -104,11 +104,12 @@ div.left-header, div.right-header {
 }
 
 div.right-header input {
-	
 	display: block;
-	
 	margin: 0.5rem;
-	
+}
+
+div.right-header input[type=submit] {
+	display: inline;
 }
 
 nav {

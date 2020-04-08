@@ -82,9 +82,11 @@ CREATE TABLE UserComments(
 
 -- Populate Tables
 
+-- Kyriau password: password
+-- asdf password: asdf
 INSERT INTO Users(Username, Email, Password, Administrator) VALUES
-	('Kyriau', 'jeff.aj.thomson@alumni.ubc.ca', SHA2('password', 256), TRUE),
-	('asdf', 'asdf@asdf.asdf', SHA2('asdf', 256), FALSE)
+	('Kyriau', 'jeff.aj.thomson@alumni.ubc.ca', '$2y$10$pINMe25SdcTeCnQ/P2pveeVQwvVOGZC3L5upOejatOQnPgTjJPujG', TRUE),
+	('asdf', 'asdf@asdf.asdf', '$2y$10$oEr685cXTzyOQvbTiW0B6eJpAJa.ZvekxFBDmQip9tD4UnZzTn2l6', FALSE)
 ;
 
 INSERT INTO Forums(Parent, UpdateTime, Name, Description) VALUES

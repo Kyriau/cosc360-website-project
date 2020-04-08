@@ -6,7 +6,7 @@
 
 	echo "<div class=\"right-header\">";
 	
-	if(isset($_SESSION['userid']) && isset($_SESSION['userpw'])) {
+	if(isset($_SESSION['userid'])) {
 		
 		get_user_by_id($_SESSION['userid']);
 		
@@ -28,6 +28,7 @@
 		echo "<input type=\"password\" id=\"password\" name=\"password\" placeholder=\"Password\">";
 		echo "<input type=\"submit\" value=\"Login\">";
 		echo "<input type=\"hidden\" id=\"redirect\" name=\"redirect\" value=\"$requestURI\">";
+		echo "<a href=\"signup.php\">Sign Up</a>";
 		echo "</form>";
 		
 	}
