@@ -15,7 +15,7 @@ CREATE TABLE Users(
 	ID INT NOT NULL AUTO_INCREMENT,
 	Username VARCHAR(64) NOT NULL,
 	Email VARCHAR(64) NOT NULL,
-	Password VARCHAR(64) NOT NULL,
+	Password VARCHAR(256) NOT NULL,
 	Administrator BOOLEAN,
 	
 	PRIMARY KEY (ID),
@@ -79,8 +79,8 @@ CREATE TABLE UserComments(
 -- Populate Tables
 
 INSERT INTO Users(Username, Email, Password, Administrator) VALUES
-	('Kyriau', 'jeff.aj.thomson@alumni.ubc.ca', 'password', TRUE),
-	('asdf', 'asdf@asdf.asdf', 'asdf', FALSE)
+	('Kyriau', 'jeff.aj.thomson@alumni.ubc.ca', SHA2('password', 256), TRUE),
+	('asdf', 'asdf@asdf.asdf', SHA2('asdf', 256), FALSE)
 ;
 
 INSERT INTO Forums(Parent, UpdateTime, Name, Description) VALUES
@@ -88,4 +88,11 @@ INSERT INTO Forums(Parent, UpdateTime, Name, Description) VALUES
 	(1, NOW(), 'Subforum 1', 'A subforum of the Main forum.'),
 	(1, NOW(), 'Subforum 2', 'Another subforum of the Main forum.'),
 	(3, NOW(), 'Second-Level Forum', 'A Subforum of a subforum (Subforum 2).')
+;
+
+INSERT INTO Threads(ForumID, UpdateTime, Title) VALUES
+	(1, NOW(), "The first thread"),
+	(1, NOW(), "The second thread"),
+	(2, NOW(), "A thread in a subforum"),
+	(1, NOW(), "A very very very very very very very very very very long title")
 ;
