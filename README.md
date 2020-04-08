@@ -5,5 +5,5 @@ Installation Instructions
 1. Install XAMPP
 2. Clone project into C:/xampp/ (or other XAMPP installation directory)
 3. Modify /xampp/apache/conf/httpd.conf
-  1. Change DocumentRoot to "C:\xampp\cosc360-website-project\src"
-  1. Change Directory to "C:\xampp\cosc360-website-project\src"
+4. Change DocumentRoot to "C:\xampp\cosc360-website-project\src"
+5. Change Directory to "C:\xampp\cosc360-website-project\src"
