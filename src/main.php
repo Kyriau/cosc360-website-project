@@ -1,4 +1,4 @@
-<?php include 'database.php'; ?>
+<?php include_once 'database.php'; ?>
 
 <!DOCTYPE html>
 <html lang=en>
@@ -16,12 +16,6 @@
 					<a class="header-nav" href="https://www.google.com">Google</a>
 					<a class="header-nav" href="html/404.html">Other</a>
 				</nav>
-			</div>
-			<!-- TODO: dynamic profile header -->
-			<!-- this should come from session info -->
-			<div class="right-header">
-				<a href="html/profile.html"><img class="profile-pic" src="img/Duck.png"></a>
-				<h3><a href="html/profile.html">Kyriau</a></h3>
 			</div>
 			<?php include 'userinfo.php'; ?>
 		</div>

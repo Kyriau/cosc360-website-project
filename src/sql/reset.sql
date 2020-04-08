@@ -18,7 +18,11 @@ CREATE TABLE Users(
 	Password VARCHAR(256) NOT NULL,
 	Administrator BOOLEAN,
 	
+	UNIQUE (Username),
+	UNIQUE (Email),
+	
 	PRIMARY KEY (ID),
+	INDEX (Username),
 	INDEX (Email)
 	
 );

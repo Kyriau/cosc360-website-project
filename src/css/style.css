@@ -103,6 +103,14 @@ div.left-header, div.right-header {
 	flex-shrink: 0;
 }
 
+div.right-header input {
+	
+	display: block;
+	
+	margin: 0.5rem;
+	
+}
+
 nav {
 
 	display: flex;

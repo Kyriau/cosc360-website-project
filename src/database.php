@@ -9,26 +9,41 @@
 	// Setup prepared statements
 	$usernameQuery = $db->prepare("SELECT * FROM Users WHERE Username = ?;");
 	$userIDQuery = $db->prepare("SELECT * FROM Users WHERE ID = ?;");
-	$userEmailQuery = $db->prepare("SELECT * FROM Users WHERE Email = ?;");
 	$forumQuery = $db->prepare("SELECT ID, Name, Description FROM Forums WHERE Parent = ? ORDER BY UpdateTime;");
 	$threadQuery = $db->prepare("SELECT ID, Title FROM Threads WHERE ForumID = ? ORDER BY UpdateTime;");
 	$commentQuery = $db->prepare("SELECT ID, Content FROM Comments WHERE ThreadID = ? ORDER BY UpdateTime LIMIT ?;");
 	$userCommentQuery = null;
+	$userInsert = $db->prepare("INSERT INTO User(Username, Email, Password, Administrator) VALUE (?, ?, ?, FALSE);";
 	
 	function get_user_by_username($username) {
 		
+		global $usernameQuery;
+		
 		$usernameQuery->bind_param("s", $username);
 		$usernameQuery->execute();
-		$user = $usernameQuery->get_result()->fetch_row();
+		$result = $usernameQuery->get_result();
 		
+		if($user = $result->fetch_row()) {
+			return $user;
+		} else {
+			return null;
+		}
 	}
 	
 	function get_user_by_id($userID) {
 		
-	}
-	
-	function get_user_by_email($email) {
-			
+		global $userIDQuery;
+		
+		$userIDQuery->bind_param("i", $userID);
+		$userIDQuery->execute();
+		$result = $userIDQuery->get_result();
+		
+		if($user = $result->fetch_row()) {
+			return $user;
+		} else {
+			return null;
+		}
+		
 	}
 	
 	// Echo a list of subforums to this forum
@@ -82,6 +97,15 @@
 		$threads->close();
 		
 		// TODO: User actions
+		if(isset($_SESSION['userid'])) {
+			
+		}
+		
+	}
+	
+	function insert_user($username, $password, $email) {
+		
+		global userInsert;
 		
 	}
 	
