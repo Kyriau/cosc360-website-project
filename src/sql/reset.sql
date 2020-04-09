@@ -2,7 +2,7 @@ USE forum;
 
 -- Reset Tables
 
-DROP TABLE UserComments;
+-- DROP TABLE UserComments;
 DROP TABLE Comments;
 DROP TABLE Threads;
 DROP TABLE Forums;
@@ -14,7 +14,7 @@ CREATE TABLE Users(
 
 	ID INT NOT NULL AUTO_INCREMENT,
 	Username VARCHAR(64) NOT NULL,
-	Email VARCHAR(64) NOT NULL,
+	Email VARCHAR(256) NOT NULL,
 	Password VARCHAR(256) NOT NULL,
 	Administrator BOOLEAN,
 	
@@ -32,7 +32,7 @@ CREATE TABLE Forums(
 	ID INT NOT NULL AUTO_INCREMENT,
 	Parent INT,
 	UpdateTime DATETIME NOT NULL,
-	Name VARCHAR(64) NOT NULL,
+	Name VARCHAR(256) NOT NULL,
 	Description TEXT,
 	
 	PRIMARY KEY (ID),
@@ -46,7 +46,7 @@ CREATE TABLE Threads(
 	ID INT NOT NULL AUTO_INCREMENT,
 	ForumID INT NOT NULL,
 	UpdateTime DATETIME NOT NULL,
-	Title VARCHAR(64) NOT NULL,
+	Title VARCHAR(256) NOT NULL,
 	
 	PRIMARY KEY (ID),
 	FOREIGN KEY (ForumID) REFERENCES Forums(ID),
@@ -69,7 +69,7 @@ CREATE TABLE Comments(
 	
 );
 
-CREATE TABLE UserComments(
+/*CREATE TABLE UserComments(
 
 	UserID INT NOT NULL,
 	CommentID INT NOT NULL,
@@ -78,7 +78,7 @@ CREATE TABLE UserComments(
 	FOREIGN KEY (UserID) REFERENCES Users(ID),
 	FOREIGN KEY (CommentID) REFERENCES Comments(ID)
 
-);
+);*/
 
 -- Populate Tables
 

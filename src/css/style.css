@@ -9,6 +9,8 @@
 	--color-off-white: #FFFFF0;
 
 	--border-yellow: 0.1rem solid var(--color-yellow);
+	
+	color: var(--color-off-white);
 
 }
 
@@ -60,13 +62,13 @@ p {
 }
 
 img.profile-pic {
-	border: 0.1rem solid var(--color-yellow);
+	border: var(--border-yellow);
 	width: 100px;
 	height: 100px;
 }
 
 img.profile-pic-large {
-	border: 0.1rem solid var(--color-yellow);
+	border: var(--border-yellow);
 	width: 200px;
 	height: 200px;
 }
@@ -85,11 +87,6 @@ body {
 div {
 
 	margin: 0.5rem;
-
-	/* Debug */
-	/*
-	border: 0.1rem solid var(--color-off-white);
-	*/
 
 }
 
