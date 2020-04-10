@@ -54,7 +54,7 @@ h4 {
 
 p {
 
-	margin: 0.5rem 0rem;
+	margin: 0.2rem 0rem;
 
 	color: var(--color-off-white);
 	font-size: 0.8rem;
@@ -82,6 +82,21 @@ body {
 	display: flex;
 	flex-direction: column;
 
+}
+
+textarea {
+	
+	margin: 0.5rem;
+	display: block;
+	
+	
+}
+
+input.reply {
+	
+	margin: 0.5rem;
+	display: block;
+	
 }
 
 div {

@@ -9,7 +9,7 @@
 	// Setup prepared statements
 	$usernameQuery = $db->prepare("SELECT * FROM Users WHERE Username = ?;");
 	$userIDQuery = $db->prepare("SELECT * FROM Users WHERE ID = ?;");
-	$forumQuery = $db->prepare("SELECT ID, Name, Description FROM Forums WHERE Parent = ? ORDER BY UpdateTime;");
+	$forumQuery = $db->prepare("SELECT * FROM Forums WHERE Parent = ? ORDER BY UpdateTime;");
 	$threadQueryByForum = $db->prepare("SELECT * FROM Threads WHERE ForumID = ? ORDER BY UpdateTime;");
 	$threadQueryByThread = $db->prepare("SELECT * FROM Threads WHERE ID = ?;");
 	$commentQueryByThread = $db->prepare("SELECT * FROM Comments WHERE ThreadID = ? ORDER BY UpdateTime LIMIT ?;");
@@ -17,6 +17,7 @@
 	//$userCommentQuery = $db->prepare("SELECT * FROM UserComments WHERE PosterID = ?;");
 	
 	$userInsert = $db->prepare("INSERT INTO Users(Username, Email, Password, Administrator) VALUE (?, ?, ?, FALSE);");
+	$commentInsert = $db->prepare("INSERT INTO Comments(PosterID, ThreadID, UpdateTime, Content) VALUE (?, ?, NOW(), ?);");
 	
 	function get_user_by_username($username) {
 		
@@ -31,6 +32,9 @@
 		} else {
 			return null;
 		}
+		
+		$result->close();
+		
 	}
 	
 	function get_user_by_id($userID) {
@@ -46,6 +50,8 @@
 		} else {
 			return null;
 		}
+		
+		$result->close();
 		
 	}
 	
@@ -63,14 +69,20 @@
 		}
 		
 		while($forumRow = $forums->fetch_row()) {
+			
+			$forumID = $forumRow[0];
+			$forumName = $forumRow[3];
+			$forumDesc = $forumRow[4];
+			
 			echo "<div class=\"content-row\">";
 			echo "<div class=\"post-title\">";
-			echo "<h4><a href=\"forum.php?id=" . $forumRow[0] . "\">" . $forumRow[1] . "</a></h4>";
+			echo "<h4><a href=\"forum.php?id=$forumID\">$forumName</a></h4>";
 			echo "</div>";
 			echo "<div class=\"post-preview\">";
-			echo "<h4>" . $forumRow[2] . "</h4>";
+			echo "<p>$forumDesc</p>";
 			echo "</div>";
 			echo "</div>";
+			
 		}
 		
 		$forums->close();
@@ -99,16 +111,19 @@
 			$threadTitle = $threadRow[3];
 			
 			$commentQueryByThread->execute();
-			$commentQueryByThread->get_result()->fetch_row();
+			$comment = $commentQueryByThread->get_result()->fetch_row();
+			$commentContent = $comment[4];
 			
 			echo "<div class=\"content-row\">";
 			echo "<div class=\"post-title\">";
 			echo "<h4><a href=\"post.php?id=$threadID\">$threadTitle</a></h4>";
 			echo "</div>";
 			echo "<div class=\"post-preview\">";
-			echo "<p>" . "Unimplemented" . "</p>"; //TODO: Post preview (based on recent comment?)
+			echo "<p>$commentContent</p>";
 			echo "</div>";
 			echo "</div>";
+			
+			$comment->close();
 			
 		}
 		
@@ -116,7 +131,7 @@
 		
 		// TODO: User actions
 		if(isset($_SESSION['userid'])) {
-			
+			 
 		}
 		
 	}
@@ -162,8 +177,18 @@
 			
 		}
 		
-		// TODO: Post reply
 		if(isset($_SESSION['userid'])) {
+			
+			$requestURI = $_SERVER['REQUEST_URI'];
+			
+			echo "<div class=\"content-row\">";
+			echo "<form action=\"reply.php\" method=\"POST\">";
+			echo "<textarea id=\"replytext\" name=\"replytext\" rows=\"4\" cols=\"20\"></textarea>";
+			echo "<input type=\"submit\" class=\"reply\" value=\"Reply\">";
+			echo "<input type=\"hidden\" id=\"threadid\" name=\"threadid\" value=\"$threadID\">";
+			echo "<input type=\"hidden\" id=\"redirect\" name=\"redirect\" value=\"$requestURI\">";
+			echo "</form>";
+			echo "</div>";
 			
 		}
 		
@@ -238,6 +263,14 @@
 		}
 		
 		return $userInsert->affected_rows;
+		
+	}
+	
+	function insert_comment($posterID, $threadID, $content) {
+		
+		global $commentInsert;
+		
+		
 		
 	}
 	

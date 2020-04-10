@@ -16,6 +16,7 @@ CREATE TABLE Users(
 	Username VARCHAR(64) NOT NULL,
 	Email VARCHAR(256) NOT NULL,
 	Password VARCHAR(256) NOT NULL,
+	ProfileDescription TEXT,
 	Administrator BOOLEAN,
 	
 	UNIQUE (Username),
@@ -101,4 +102,9 @@ INSERT INTO Threads(ForumID, UpdateTime, Title) VALUES
 	(1, NOW(), "The second thread"),
 	(2, NOW(), "A thread in a subforum"),
 	(1, NOW(), "A very very very very very very very very very very long title")
+;
+
+INSERT INTO Comments(PosterID, ThreadID, UpdateTime, Content) VALUES
+	(2, 1, NOW(), "This is the content of a comment."),
+	(1, 1, NOW(), "This is another comment.")
 ;
