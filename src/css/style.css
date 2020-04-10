@@ -89,7 +89,6 @@ textarea {
 	margin: 0.5rem;
 	display: block;
 	
-	
 }
 
 input.reply {
@@ -189,4 +188,13 @@ div.footer {
 
 div.nav {
 	justify-content: center;
+}
+
+div.label {
+	margin: 0.5rem;
+	text-align: center;
+}
+
+input.title {
+	width: 12rem;
 }

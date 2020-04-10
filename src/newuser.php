@@ -19,6 +19,16 @@
 		die();
 	}
 	
+	//TODO: User Image
+	$userImg = $_FILES['userimg'];
+	if($userImg["size"] > 10000000) {
+		header("Location: signup.php?error=3");
+	}
+	if($userImg["type"] == "") {
+		header("Location: signup.php?error=4");
+	}
+	
+	
 	$rval = insert_user($username, $password, $email);
 	
 	if($rval > 0) {

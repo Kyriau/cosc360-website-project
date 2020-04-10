@@ -9,15 +9,19 @@
 	// Setup prepared statements
 	$usernameQuery = $db->prepare("SELECT * FROM Users WHERE Username = ?;");
 	$userIDQuery = $db->prepare("SELECT * FROM Users WHERE ID = ?;");
-	$forumQuery = $db->prepare("SELECT * FROM Forums WHERE Parent = ? ORDER BY UpdateTime;");
-	$threadQueryByForum = $db->prepare("SELECT * FROM Threads WHERE ForumID = ? ORDER BY UpdateTime;");
+	$forumQuery = $db->prepare("SELECT * FROM Forums WHERE Parent = ? ORDER BY UpdateTime DESC;");
+	$threadQueryByForum = $db->prepare("SELECT * FROM Threads WHERE ForumID = ? ORDER BY UpdateTime DESC;");
 	$threadQueryByThread = $db->prepare("SELECT * FROM Threads WHERE ID = ?;");
-	$commentQueryByThread = $db->prepare("SELECT * FROM Comments WHERE ThreadID = ? ORDER BY UpdateTime LIMIT ?;");
-	$commentQueryByUser = $db->prepare("SELECT * FROM Comments WHERE PosterID = ? ORDER BY UpdateTime LIMIT ?;");
+	$commentQueryByThread = $db->prepare("SELECT * FROM Comments WHERE ThreadID = ? ORDER BY UpdateTime ASC LIMIT ?;");
+	$commentQueryByUser = $db->prepare("SELECT * FROM Comments WHERE PosterID = ? ORDER BY UpdateTime DESC LIMIT ?;");
 	//$userCommentQuery = $db->prepare("SELECT * FROM UserComments WHERE PosterID = ?;");
 	
 	$userInsert = $db->prepare("INSERT INTO Users(Username, Email, Password, Administrator) VALUE (?, ?, ?, FALSE);");
 	$commentInsert = $db->prepare("INSERT INTO Comments(PosterID, ThreadID, UpdateTime, Content) VALUE (?, ?, NOW(), ?);");
+	$threadInsert = $db->prepare("INSERT INTO Threads(ForumID, UpdateTime, Title) VALUE (?, NOW(), ?);");
+	
+	$threadUpdateTime = $db->prepare("UPDATE Threads SET UpdateTime = NOW() WHERE ID = ?;");
+	$forumUpdateTime = $db->prepare("UPDATE Forums SET UpdateTime = NOW() WHERE ID = ?;");
 	
 	function get_user_by_username($username) {
 		
@@ -116,22 +120,34 @@
 			
 			echo "<div class=\"content-row\">";
 			echo "<div class=\"post-title\">";
-			echo "<h4><a href=\"post.php?id=$threadID\">$threadTitle</a></h4>";
+			echo "<h4><a href=\"thread.php?id=$threadID\">$threadTitle</a></h4>";
 			echo "</div>";
 			echo "<div class=\"post-preview\">";
 			echo "<p>$commentContent</p>";
 			echo "</div>";
 			echo "</div>";
 			
-			$comment->close();
-			
 		}
 		
 		$threads->close();
 		
-		// TODO: User actions
 		if(isset($_SESSION['userid'])) {
-			 
+			
+			$requestURI = $_SERVER['REQUEST_URI'];
+			
+			echo "<div class=\"content-row\">";
+			echo "<form action=\"post.php\" method=\"POST\">";
+			echo "<div class=\"label\">";
+			echo "<label for=\"title\">Title: </label>";
+			echo "<input type=\"text\" class=\"title\" id=\"title\" name=\"title\">";
+			echo "</div>";
+			echo "<textarea id=\"replytext\" name=\"replytext\" rows=\"4\" cols=\"40\"></textarea>";
+			echo "<input type=\"submit\" class=\"reply\" value=\"Post\">";
+			echo "<input type=\"hidden\" id=\"forumid\" name=\"forumid\" value=\"$forumID\">";
+			echo "<input type=\"hidden\" id=\"redirect\" name=\"redirect\" value=\"$requestURI\">";
+			echo "</form>";
+			echo "</div>";
+			
 		}
 		
 	}
@@ -183,7 +199,7 @@
 			
 			echo "<div class=\"content-row\">";
 			echo "<form action=\"reply.php\" method=\"POST\">";
-			echo "<textarea id=\"replytext\" name=\"replytext\" rows=\"4\" cols=\"20\"></textarea>";
+			echo "<textarea id=\"replytext\" name=\"replytext\" rows=\"4\" cols=\"40\"></textarea>";
 			echo "<input type=\"submit\" class=\"reply\" value=\"Reply\">";
 			echo "<input type=\"hidden\" id=\"threadid\" name=\"threadid\" value=\"$threadID\">";
 			echo "<input type=\"hidden\" id=\"redirect\" name=\"redirect\" value=\"$requestURI\">";
@@ -233,7 +249,7 @@
 			
 			echo "<div class=\"content-row\">";
 			echo "<div class=\"post-title\">";
-			echo "<h4><a href=\"post.php?id=$threadID\">$threadTitle</a></h4>";
+			echo "<h4><a href=\"thread.php?id=$threadID\">$threadTitle</a></h4>";
 			echo "</div>";
 			echo "<div class=\"post-preview\">";
 			echo "<p>$commentContent</p>";
@@ -256,7 +272,7 @@
 		echo $userInsert->affected_rows;
 		
 		if($userInsert->affected_rows > 0) {
-			$result = $userInsert->get_result();
+			//$result = $userInsert->get_result();
 			session_start();
 			$_SESSION['userid'] = $userInsert->insert_id;
 			$_SESSION['passhash'] = $password;
@@ -268,9 +284,47 @@
 	
 	function insert_comment($posterID, $threadID, $content) {
 		
-		global $commentInsert;
+		global $commentInsert, $threadUpdateTime, $forumUpdateTime, $threadQueryByThread;
+		
+		// Some modest input sanitation
+		$content = strip_tags($content);
+		$content = str_replace("\n", "<br>", $content);
+		
+		$commentInsert->bind_param("iis", $posterID, $threadID, $content);
+		$commentInsert->execute();
+		
+		$threadQueryByThread->bind_param("i", $threadID);
+		$threadQueryByThread->execute();
+		$thread = $threadQueryByThread->get_result()->fetch_row();
+		$forumID = $thread[1];
+		
+		$threadUpdateTime->bind_param("i", $threadID);
+		$forumUpdateTime->bind_param("i", $forumID);
+		$threadUpdateTime->execute();
+		$forumUpdateTime->execute();
 		
 		
+	}
+	
+	function insert_thread($posterID, $forumID, $title, $content) {
+		
+		global $threadInsert, $commentInsert, $forumUpdateTime;
+		
+		// Some modest input sanitation
+		$title = strip_tags($title);
+		$content = strip_tags($content);
+		$content = str_replace("\n", "<br>", $content);
+		
+		$threadInsert->bind_param("is", $forumID, $title);
+		$threadInsert->execute();
+		
+		$threadID = $threadInsert->insert_id;
+		
+		$commentInsert->bind_param("iis", $posterID, $threadID, $content);
+		$commentInsert->execute();
+		
+		$forumUpdateTime->bind_param("i", $forumID);
+		$forumUpdateTime->execute();
 		
 	}
 	

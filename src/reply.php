@@ -10,8 +10,7 @@
 	
 	include 'database.php';
 	
-	$userID = $_SESSION['userid'];
-	
+	insert_comment($_SESSION['userid'], $_POST['threadid'], $_POST['replytext']);
 	
 	$redirectURI = $_POST['redirect'];
 	header("Location: $redirectURI");
