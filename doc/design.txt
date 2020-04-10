@@ -1,0 +1,21 @@
+A large portion of the project is unimplemented because I ran out of time.
+Relevant GitHub: https://github.com/Kyriau/cosc360-website-project
+
+Features (By Marking Rubric)
+1) Posts, threads, and user profiles can be viewed while or while not logged-in as an account.
+2) Flexbox is used to scale elements corresponding to window size.
+3) Server stores password hashes in an SQL database and validates user login. User login uses PHP sessions.
+4) Searches unimplemented, but would be done using forms and MySQL's "LIKE".
+5) No Javascript form validation implemented; currently only some HTMl and PHP validation.
+6) Users can register to the site, including with a user image.
+7) Users can log into the site with username and password, and login is checked against the password hash stored in database.
+8) Users can post threads and reply to existing threads. This information is stored in the database.
+9) Users can view their profile, but not edit it.
+10) No password recovery is implemeneted.
+11) Many secions of PHP perform some error handling, but sending error responses to the user is largely unimplemented. Requesting a missing page only outputs the standard apache 404 page.
+12) User login status is stored using PHP sessions, so users can close browser, reopen, and still be logged in.
+13) through 15) Administrator status is stored in the User table, but there is no functionality implemented.
+
+Additional Features
+1) Thread activity within forums is sorted by the time of the most recent reply.
+2) Forms to post and reply to threads are only displayed while a user is logged in.
