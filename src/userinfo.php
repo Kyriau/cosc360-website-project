@@ -25,7 +25,7 @@
 			$username = $user[1];
 			
 			echo "<a href=\"profile.php?id=$userID\">";
-			echo "<img class=\"profile-pic\" src=\"img/Duck.png\">";
+			echo "<img class=\"profile-pic\" src=\"img/$userID.png\">";
 			echo "</a>";
 			echo "<h3>";
 			echo "<a href=\"profile.php?id=$userID\">$username</a>";

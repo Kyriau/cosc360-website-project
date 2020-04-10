@@ -106,5 +106,8 @@ INSERT INTO Threads(ForumID, UpdateTime, Title) VALUES
 
 INSERT INTO Comments(PosterID, ThreadID, UpdateTime, Content) VALUES
 	(2, 1, NOW(), "This is the content of a comment."),
-	(1, 1, NOW(), "This is another comment.")
+	(1, 1, NOW(), "This is another comment."),
+	(1, 2, NOW(), "This is a comment in thread 2"),
+	(1, 3, NOW(), "This is a comment in thread 3"),
+	(1, 4, NOW(), "This is a comment in thread 4")
 ;

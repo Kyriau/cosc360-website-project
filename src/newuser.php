@@ -19,20 +19,22 @@
 		die();
 	}
 	
-	//TODO: User Image
 	$userImg = $_FILES['userimg'];
-	if($userImg["size"] > 10000000) {
+	if($userImg['size'] > 10000000) {
 		header("Location: signup.php?error=3");
+		die();
 	}
-	if($userImg["type"] == "") {
+	if($userImg['type'] != "image/png") {
 		header("Location: signup.php?error=4");
+		die();
 	}
-	
 	
 	$rval = insert_user($username, $password, $email);
 	
 	if($rval > 0) {
 		$userID = $_SESSION['userid'];
+		$fileToMove = $userImg['tmp_name'];
+		move_uploaded_file($fileToMove, "img/$userID.png");
 		header("Location: profile.php?ID=$userID");
 		die();
 	} else {

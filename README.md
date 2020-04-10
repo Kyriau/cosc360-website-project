@@ -7,3 +7,4 @@ Installation Instructions
 3. Modify /xampp/apache/conf/httpd.conf
 4. Change DocumentRoot to "C:\xampp\cosc360-website-project\src"
 5. Change Directory to "C:\xampp\cosc360-website-project\src"
+6. Execute the SQL script "C:\xampp\cosc360-website-project\src\sql\reset.sql" to set up the database

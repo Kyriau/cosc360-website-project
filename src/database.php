@@ -183,7 +183,7 @@
 			
 			echo "<div class=\"content-row\">";
 			echo "<div class=\"profile-pic\">";
-			echo "<a href=\"profile.php?id=$posterID\"><img class=\"profile-pic\" src=\"img/Duck.png\"></a>";
+			echo "<a href=\"profile.php?id=$posterID\"><img class=\"profile-pic\" src=\"img/$posterID.png\"></a>";
 			echo "<h3><a href=\"profile.php?id=$posterID\">$posterName</a></h3>";
 			echo "</div>";
 			echo "<div class=\"post-comment\">";
@@ -220,7 +220,7 @@
 		echo "<h2>$username</h2>";
 		echo "<div class=\"content-row\">";
 		echo "<div class=\"profile-pic\">";
-		echo "<img class=\"profile-pic-large\" src=\"img/Duck.png\">";
+		echo "<img class=\"profile-pic-large\" src=\"img/$userID.png\">";
 		echo "</div>";
 		echo "<div class=\"profile-desc\">";
 		echo "<p>TODO: User Description Here</p>"; //TODO: User Description

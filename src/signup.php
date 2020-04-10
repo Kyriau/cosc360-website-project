@@ -44,7 +44,7 @@
 			<div class="content">
 			
 				<h2>Sign Up</h2>
-				<form action="newuser.php" method="POST">
+				<form action="newuser.php" method="POST" enctype="multipart/form-data">
 					<table>
 					<tr><h4>
 						<td><label for="username">Username:</label></td>
