@@ -9,6 +9,8 @@
 	--color-off-white: #FFFFF0;
 
 	--border-yellow: 0.1rem solid var(--color-yellow);
+	
+	color: var(--color-off-white);
 
 }
 
@@ -52,7 +54,7 @@ h4 {
 
 p {
 
-	margin: 0.5rem 0rem;
+	margin: 0.2rem 0rem;
 
 	color: var(--color-off-white);
 	font-size: 0.8rem;
@@ -60,13 +62,13 @@ p {
 }
 
 img.profile-pic {
-	border: 0.1rem solid var(--color-yellow);
+	border: var(--border-yellow);
 	width: 100px;
 	height: 100px;
 }
 
 img.profile-pic-large {
-	border: 0.1rem solid var(--color-yellow);
+	border: var(--border-yellow);
 	width: 200px;
 	height: 200px;
 }
@@ -82,14 +84,23 @@ body {
 
 }
 
+textarea {
+	
+	margin: 0.5rem;
+	display: block;
+	
+}
+
+input.reply {
+	
+	margin: 0.5rem;
+	display: block;
+	
+}
+
 div {
 
 	margin: 0.5rem;
-
-	/* Debug */
-	/*
-	border: 0.1rem solid var(--color-off-white);
-	*/
 
 }
 
@@ -101,6 +112,15 @@ div.header {
 
 div.left-header, div.right-header {
 	flex-shrink: 0;
+}
+
+div.right-header input {
+	display: block;
+	margin: 0.5rem;
+}
+
+div.right-header input[type=submit] {
+	display: inline;
 }
 
 nav {
@@ -168,4 +188,13 @@ div.footer {
 
 div.nav {
 	justify-content: center;
+}
+
+div.label {
+	margin: 0.5rem;
+	text-align: center;
+}
+
+input.title {
+	width: 12rem;
 }
